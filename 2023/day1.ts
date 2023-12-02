@@ -2,21 +2,16 @@
  * Advent of code 2020 day 1
  * https://adventofcode.com/2023/day/1
  */
-import { readFileSync } from "fs";
+import parseFile from "./utils/parseFile";
 
 // Break the content into an array of lines
-const breakContentLinesIntoArray = (content:string) => {
-    return content.split("\n");
-}
-
-// Break the content into an array of lines
-const extractDigitsFromLines = (lines:string[]) => {
+const extractDigitsFromLines = (lines: string[]) => {
     return lines.map((line) => {
-        if(line === ''){
-            return ["0","0"];
+        if (line === '') {
+            return ["0", "0"];
         }
         const results = line.match(/\d/g);
-        if(results === null) {
+        if (results === null) {
             throw new Error(`no digit found in line "${line}"`);
         }
 
@@ -25,7 +20,7 @@ const extractDigitsFromLines = (lines:string[]) => {
 }
 
 // Sum up the first and last digit in each line
-const sumOfFirstAndLastDigitInLine = (numberLines:string[][]) => {
+const sumOfFirstAndLastDigitInLine = (numberLines: string[][]) => {
     return numberLines.map((numbers) => {
         const first = numbers[0];
         const last = numbers[numbers.length - 1];
@@ -35,9 +30,7 @@ const sumOfFirstAndLastDigitInLine = (numberLines:string[][]) => {
 }
 
 const main = () => {
-    const input = readFileSync("2023/day1.txt", "utf8");
-
-    const lines = breakContentLinesIntoArray(input);
+    const lines = parseFile("2023/day1.txt");
 
     const numberLines = extractDigitsFromLines(lines);
 
