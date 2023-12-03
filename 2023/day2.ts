@@ -48,14 +48,23 @@ const extractGamesData = (lines: Array<string>): Array<Game> => {
     return games;
 };
 
-const main = () => {
-    const lines = parseFile("2023/day2.txt");
+const first = (file: string) => {
+    const lines = parseFile(file);
 
     const games = extractGamesData(lines);
 
     const validGames = games.filter((game) => game.red <= limits.red && game.green <= limits.green && game.blue <= limits.blue);
 
-    console.log(`Answer is: ${validGames.reduce((a, b) => a + b.id, 0)}`);
+    console.log(`First Answer is: ${validGames.reduce((a, b) => a + b.id, 0)}`);
 }
 
-main();
+const second = (file: string) => {
+    const lines = parseFile(file);
+
+    const games = extractGamesData(lines);
+
+    console.log(`Second Answer is: ${games.reduce((a, b) => a + (b.red * b.green * b.blue), 0)}`);
+}
+
+first("2023/day2.txt");
+second("2023/day2.txt");
