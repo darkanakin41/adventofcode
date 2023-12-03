@@ -4,6 +4,18 @@
  */
 import parseFile from "./utils/parseFile";
 
+const numberFromString: Record<string, string> = {
+    'one': 'o1ne',
+    'two': 't2wo',
+    'three': 't3hree',
+    'four': 'f4our',
+    'five':'f5ive',
+    'six': 's6ix',
+    'seven': 's7even',
+    'eight': 'e8ight',
+    'nine': 'n9ine',
+}
+
 // Break the content into an array of lines
 const extractDigitsFromLines = (lines: string[]) => {
     return lines.map((line) => {
@@ -12,7 +24,8 @@ const extractDigitsFromLines = (lines: string[]) => {
         }
         const results = line.match(/\d/g);
         if (results === null) {
-            throw new Error(`no digit found in line "${line}"`);
+            console.error(`no digit found in line "${line}"`);
+            return ["0", "0"];
         }
 
         return results;
@@ -29,14 +42,37 @@ const sumOfFirstAndLastDigitInLine = (numberLines: string[][]) => {
     })
 }
 
-const main = () => {
-    const lines = parseFile("2023/day1.txt");
+const replaceStringsWithNumbers = (lines: string[]) => {
+    lines.forEach((line, index) => {
+        let newLine = line
+        Object.keys(numberFromString).forEach((number) => {
+            newLine = newLine.replace(new RegExp(number, 'gi'), numberFromString[number].toString());
+        })
+        lines[index] = newLine
+    })
+}
+
+const first = (file:string) => {
+    const lines = parseFile(file);
 
     const numberLines = extractDigitsFromLines(lines);
 
     const linesSummedUp = sumOfFirstAndLastDigitInLine(numberLines);
 
-    console.log(`Answer is: ${linesSummedUp.reduce((a, b) => a + b)}`);
+    console.log(`First Answer is: ${linesSummedUp.reduce((a, b) => a + b)}`);
 }
 
-main();
+const second = (file:string) => {
+    const lines = parseFile(file);
+
+    replaceStringsWithNumbers(lines);
+
+    const numberLines = extractDigitsFromLines(lines);
+
+    const linesSummedUp = sumOfFirstAndLastDigitInLine(numberLines);
+
+    console.log(`Second Answer is: ${linesSummedUp.reduce((a, b) => a + b)}`);
+}
+
+first('2023/day1.txt');
+second('2023/day1.txt');
