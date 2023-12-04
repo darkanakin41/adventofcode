@@ -1,8 +1,8 @@
 /**
- * Advent of code 2020 day 2
- * https://adventofcode.com/2023/day/2
+ * Advent of code 2020 day 3
+ * https://adventofcode.com/2023/day/3
  */
-import parseFile from "./utils/parseFile";
+import parseFile from "../utils/parseFile";
 
 type Coords = {
     x: number,
@@ -71,15 +71,15 @@ const extractNumbers = (lines: Array<string>): Array<ContentNumber> => {
     return numbers;
 }
 
-const first = (file: string) => {
+export const first = (file: string):number => {
     const lines = parseFile(file);
 
     const numbers = extractNumbers(lines);
 
-    console.log(`First Answer is: ${numbers.reduce((a, b) => a + b.value, 0)}`);
+    return numbers.reduce((a, b) => a + b.value, 0);
 }
 
-const second = (file: string) => {
+export const second = (file: string) => {
     const lines = parseFile(file);
 
     const numbers = extractNumbers(lines);
@@ -96,8 +96,8 @@ const second = (file: string) => {
         }
     })
 
-    console.log(`Second Answer is: ${total}`);
+    return total;
 }
 
-first("2023/day3.txt");
-second("2023/day3.txt");
+console.log(`First Answer is: ${first('2023/data/day3.txt')}`);
+console.log(`Second Answer is: ${second('2023/data/day3.txt')}`);

@@ -2,7 +2,7 @@
  * Advent of code 2020 day 1
  * https://adventofcode.com/2023/day/1
  */
-import parseFile from "./utils/parseFile";
+import parseFile from "../utils/parseFile";
 
 const numberFromString: Record<string, string> = {
     'one': 'o1ne',
@@ -52,17 +52,17 @@ const replaceStringsWithNumbers = (lines: string[]) => {
     })
 }
 
-const first = (file:string) => {
+export const first = (file:string): number => {
     const lines = parseFile(file);
 
     const numberLines = extractDigitsFromLines(lines);
 
     const linesSummedUp = sumOfFirstAndLastDigitInLine(numberLines);
 
-    console.log(`First Answer is: ${linesSummedUp.reduce((a, b) => a + b)}`);
+    return linesSummedUp.reduce((a, b) => a + b)
 }
 
-const second = (file:string) => {
+export const second = (file:string): number => {
     const lines = parseFile(file);
 
     replaceStringsWithNumbers(lines);
@@ -71,8 +71,9 @@ const second = (file:string) => {
 
     const linesSummedUp = sumOfFirstAndLastDigitInLine(numberLines);
 
-    console.log(`Second Answer is: ${linesSummedUp.reduce((a, b) => a + b)}`);
+    return linesSummedUp.reduce((a, b) => a + b);
 }
 
-first('2023/day1.txt');
-second('2023/day1.txt');
+
+console.log(`First Answer is: ${first('2023/data/day1.txt')}`);
+console.log(`Second Answer is: ${second('2023/data/day1.txt')}`);

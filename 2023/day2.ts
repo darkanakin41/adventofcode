@@ -2,7 +2,7 @@
  * Advent of code 2020 day 2
  * https://adventofcode.com/2023/day/2
  */
-import parseFile from "./utils/parseFile";
+import parseFile from "../utils/parseFile";
 
 const limits = {
     red: 12,
@@ -48,23 +48,23 @@ const extractGamesData = (lines: Array<string>): Array<Game> => {
     return games;
 };
 
-const first = (file: string) => {
+export const first = (file: string):number => {
     const lines = parseFile(file);
 
     const games = extractGamesData(lines);
 
     const validGames = games.filter((game) => game.red <= limits.red && game.green <= limits.green && game.blue <= limits.blue);
 
-    console.log(`First Answer is: ${validGames.reduce((a, b) => a + b.id, 0)}`);
+    return validGames.reduce((a, b) => a + b.id, 0);
 }
 
-const second = (file: string) => {
+export const second = (file: string):number => {
     const lines = parseFile(file);
 
     const games = extractGamesData(lines);
 
-    console.log(`Second Answer is: ${games.reduce((a, b) => a + (b.red * b.green * b.blue), 0)}`);
+    return games.reduce((a, b) => a + (b.red * b.green * b.blue), 0);
 }
 
-first("2023/day2.txt");
-second("2023/day2.txt");
+console.log(`First Answer is: ${first('2023/data/day2.txt')}`);
+console.log(`Second Answer is: ${second('2023/data/day2.txt')}`);
